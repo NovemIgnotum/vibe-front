@@ -1,0 +1,21 @@
+/* Connexion.css */
+.connexion-container {
+    background-image: url('../image/connexion.png');
+    background-size: cover; /* Couvre toute la surface */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Évite la répétition de l'image */
+    height: 100vh; /* Prend toute la hauteur de la vue */
+    width: 100vw; /* Prend toute la largeur de la vue */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .connexion-content {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour lisibilité */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
