@@ -1,38 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { backendHealth } from "./utils/backendHealth";
 import "./App.css";
 import Connexion from "./pages/connexion";
-import axios from "axios";
 
-console.log(process.env.REACT_APP_API_URL);
+const App = () => {
+  const [isBackendAvailable, setIsBackendAvailable] = useState(false);
 
-function App() {
   useEffect(() => {
-    isServerUp();
+    const checkBackendHealth = async () => {
+      const isAvailable = await backendHealth();
+      setIsBackendAvailable(isAvailable);
+    };
+
+    checkBackendHealth();
   }, []);
-
-  const isServerUp = async () => {
-    try {
-      await axios
-        .get(`${process.env.REACT_APP_API_URL}/user/ServerUp`)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="App">
       <header className="App-header">
-        <Connexion />
-        here
+        {isBackendAvailable ? (
+          <div>
+            <Connexion />
+            here
+          </div>
+        ) : (
+          <p>Backend not available</p>
+        )}
       </header>
     </div>
   );
-}
+};
 
 export default App;
