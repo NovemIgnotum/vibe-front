@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { backendHealth } from "./utils/backendHealth";
 import "./App.css";
+import 'react-toastify/dist/ReactToastify.css';
 import Connexion from "./pages/connexion";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [isBackendAvailable, setIsBackendAvailable] = useState(false);
@@ -13,15 +15,15 @@ const App = () => {
       console.log("Backend health checked");
     };
 
-    checkBackendHealth(); // Call initially to check immediately on mount
+    checkBackendHealth(); 
 
-    const interval = setInterval(checkBackendHealth, 20000); // Set interval to 1 minute
-
-    return () => clearInterval(interval); // Cleanup on unmount
+    const interval = setInterval(checkBackendHealth, 20000); 
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="App">
+      <ToastContainer />
       <header className="App-header">
         {isBackendAvailable ? (
           <div>
