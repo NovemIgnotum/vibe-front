@@ -12,10 +12,21 @@
   }
   
   .connexion-content {
-    text-align: center;
     color: white;
     background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour lisibilité */
     padding: 20px;
     border-radius: 10px;
   }
+
+  .change-button {
+    border: none;
+    color: #3CBF54;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: medium;
+    font-weight: bold;
+  }
+
+
   

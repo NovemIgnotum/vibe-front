@@ -15,12 +15,32 @@ const Connexion = () => {
       {isSignup ? (
         <div className="connexion-content">
           <SignUp />
-          <button onClick={toggleSignup}>Se connecter</button>
+          <hr
+            style={{
+              width: "100%",
+              color: "black",
+              backgroundColor: "black",
+              height: 1,
+            }}
+          />
+          <button className="change-button" onClick={toggleSignup}>
+            Se connecter
+          </button>
         </div>
       ) : (
         <div className="connexion-content">
           <Login />
-          <button onClick={toggleSignup}>S'inscrire</button>
+          <hr
+            style={{
+              width: "100%",
+              color: "black",
+              backgroundColor: "black",
+              height: 1,
+            }}
+          />
+          <button className="change-button" onClick={toggleSignup}>
+            S'inscrire
+          </button>
         </div>
       )}
     </div>

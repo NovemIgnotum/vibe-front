@@ -1,8 +1,73 @@
 .form-input {
-    width: 80%;
+    width: 350px;
     padding: 10px;
     margin: 10px 0;
+    height: 35px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    align-self: flex-start;
 }
+
+.signUp-form {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 640px;
+    padding: 20px;
+    justify-content: flex-start;
+    align-items: center; /* Center items horizontally */
+    align-self: center;
+}
+
+.signUp-form label {
+    text-align: left; /* Align text to the right */
+    color: #41D360;
+    font-size: 23px;
+    max-width: 200px;
+    font-weight: bold;
+    align-self: flex-start; /* Align to the right within the flex container */
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.validate-button {
+    width: 100px;
+    height: 40px;
+    background-color: #41D360;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.validate-button:hover {
+    background-color: #3CBF54;
+} 
+ .cancel-button {
+    width: 100px;
+    height: 40px;
+    background-color: #FF0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+ }
+
+ .button-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+    align-self: flex-end;
+ }
