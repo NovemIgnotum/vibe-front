@@ -4,43 +4,21 @@ import Login from "../components/login";
 import SignUp from "../components/signup";
 
 const Connexion = () => {
-  const [isSignup, setIsSignup] = useState<boolean>(false);
+  const [alreadyHaveAccount, setAlreadyHaveAccount] = useState<boolean>(false);
 
-  const toggleSignup = () => {
-    setIsSignup(!isSignup);
+  const toggleHaveAccount = () => {
+    setAlreadyHaveAccount(!alreadyHaveAccount);
   };
 
   return (
     <div className="connexion-container">
-      {isSignup ? (
+      {alreadyHaveAccount ? (
         <div className="connexion-content">
-          <SignUp />
-          <hr
-            style={{
-              width: "100%",
-              color: "black",
-              backgroundColor: "black",
-              height: 1,
-            }}
-          />
-          <button className="change-button" onClick={toggleSignup}>
-            Se connecter
-          </button>
+          <SignUp alreadyHaveAccount={toggleHaveAccount} />
         </div>
       ) : (
         <div className="connexion-content">
-          <Login />
-          <hr
-            style={{
-              width: "100%",
-              color: "black",
-              backgroundColor: "black",
-              height: 1,
-            }}
-          />
-          <button className="change-button" onClick={toggleSignup}>
-            S'inscrire
-          </button>
+          <Login alreadyHaveAccount={toggleHaveAccount} />
         </div>
       )}
     </div>
