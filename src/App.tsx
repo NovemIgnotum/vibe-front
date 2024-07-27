@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Connexion from "./pages/connexion";
 import { ToastContainer } from "react-toastify";
 import { useAuth } from "./context/AuthContext";
+import Header from "./components/Header";
+import Home from "./pages/home";
 
 const App = () => {
   const [isBackendAvailable, setIsBackendAvailable] = useState(false);
@@ -18,22 +20,24 @@ const App = () => {
 
     checkBackendHealth();
 
-    const interval = setInterval(checkBackendHealth, 200000);
+    console.log("isSignup", isSignup);
+    const interval = setInterval(checkBackendHealth, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isSignup]);
 
   return (
     <div className="App">
       <ToastContainer />
       <header className="App-header">
         {isBackendAvailable ? (
-          isSignup ? (
+          !isSignup ? (
             <div>
               <Connexion />
             </div>
           ) : (
-            <div>
-              <p>user connecté</p>
+            <div className="body">
+              <Header />
+              <Home />
               <button onClick={toggleSignup}>Déconnexion</button>
             </div>
           )
