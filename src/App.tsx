@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { backendHealth } from "./utils/backendHealth";
+import { useEffect } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Connexion from "./pages/connexion";
@@ -9,40 +8,23 @@ import Header from "./components/Header";
 import Home from "./pages/home";
 
 const App = () => {
-  const [isBackendAvailable, setIsBackendAvailable] = useState(false);
-  const { isSignup, toggleSignup } = useAuth();
+  const { isSignup } = useAuth();
 
-  useEffect(() => {
-    const checkBackendHealth = async () => {
-      const isAvailable = await backendHealth();
-      setIsBackendAvailable(isAvailable);
-    };
-
-    checkBackendHealth();
-
-    console.log("isSignup", isSignup);
-    const interval = setInterval(checkBackendHealth, 2000);
-    return () => clearInterval(interval);
-  }, [isSignup]);
+  useEffect(() => {}, [isSignup]);
 
   return (
     <div className="App">
       <ToastContainer />
       <header className="App-header">
-        {isBackendAvailable ? (
-          !isSignup ? (
-            <div>
-              <Connexion />
-            </div>
-          ) : (
-            <div className="body">
-              <Header />
-              <Home />
-              <button onClick={toggleSignup}>Déconnexion</button>
-            </div>
-          )
+        {!isSignup ? (
+          <div>
+            <Connexion />
+          </div>
         ) : (
-          <p>Connexion au serveur de Vibe impossible, réessayer plus tard</p>
+          <div className="body">
+            <Header />
+            <Home />
+          </div>
         )}
       </header>
     </div>

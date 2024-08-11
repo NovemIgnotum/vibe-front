@@ -44,6 +44,7 @@ const Signup = (props: props) => {
               email: formValues.email,
               password: formValues.password,
               pseudo: formValues.pseudo,
+              role: "user",
             })
             .then((res) => {
               console.log("User created", res);

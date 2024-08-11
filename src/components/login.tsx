@@ -31,6 +31,8 @@ const Login = (props: props) => {
             console.log("User logged in", res);
             toast.success("Utilisateur connecté avec succès");
             toggleSignup();
+            localStorage.setItem("id", res.data.id);
+            localStorage.setItem("token", res.data.token);
             setFormValues({
               email: "",
               password: "",

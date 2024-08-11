@@ -13,7 +13,7 @@ const SearchContext = createContext<SearchContextProps | undefined>(undefined);
 const useSearchContext = () => {
   const context = useContext(SearchContext);
   if (!context) {
-    throw new Error(
+    console.error(
       "useSearchContext must be used within a SearchContextProvider"
     );
   }

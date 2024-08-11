@@ -3,8 +3,12 @@
   justify-content: center;
   align-items: center;
   width: 50%;
-    margin-left: 350px; 
-    margin-right: 350px;
+  margin-left: 500px; 
+  margin-right: 350px;
+  position: fixed; /* Pour la rendre fixe */
+  z-index: 1000; /* La garde au-dessus des autres éléments */
+  padding: 10px 0; /* Optionnel : ajoute du padding autour de la barre */
+  top: 2; /* Place en haut de la page */
 }
 
 .searchInput{
@@ -17,4 +21,10 @@
     border: 3px solid #8321BF;
     background-color: transparent;
     color: white;
+}
+
+.resultsContainer {
+  margin-top: 100px; /* Crée un espace sous la barre de recherche, ajustez cette valeur selon la hauteur de la barre */
+  padding: 0 20px; /* Optionnel : Ajoute un padding autour des résultats */
+  margin-left: 370px;
 }
