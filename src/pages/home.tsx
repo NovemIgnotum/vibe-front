@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../style/home.css";
+import { useUser } from "../context/UserContext";
 
 const Home = () => {
   const [playlists, setPlaylists] = useState([]);
+  const [band, setBand] = useState([]);
+  const [genre, setGenre] = useState([]);
+  const {setFirstName, setBackgroundPicture, setEmail, setName, setPlaylists : setUserPlaylist, setProfilePicture, setPseudo  } = useUser();
   useEffect(() => {
     myplaylist();
     getUserInfo();
+    getRandomArtist();
+    getRandomGenre();
   }, []);
 
   const myplaylist = async () => {
@@ -26,18 +32,48 @@ const Home = () => {
     }
   };
 
+  const getRandomArtist = async () => {
+    try {
+      await axios.get(`${process.env.REACT_APP_API_URL}/band/GetRandomBand`).then((res) => {
+        console.log("Artist", res.data.bands);
+        setBand(res.data.bands);
+      }).catch((e) => {
+        console.error("Error while getting artist", e);
+      })
+
+
+    } catch (e) {
+      console.error("Error while getting artist", e);
+    }
+  }
+
+  const getRandomGenre = async () => {
+    try {
+      await axios.get(`${process.env.REACT_APP_API_URL}/genre/randomGenre`).then((res) => {
+        console.log("Genre", res.data.genre);
+        setGenre(res.data.genre);
+      }).catch((e) => {
+        console.error("Error while getting genre", e);
+      })
+  }
+  catch (e) {
+    console.error("Error while getting genre", e);
+  }}
+
   const getUserInfo = async () => {
     try {
-      const userId = localStorage.getItem("id");
+      const userId = localStorage.getItem("id")
       await axios
         .get(`${process.env.REACT_APP_API_URL}/user/${userId}`)
         .then((res) => {
-          console.log("User", res.data.message.profilePicture);
-          localStorage.setItem("pseudo", res.data.message.pseudo);
-          localStorage.setItem(
-            "profilPicture",
-            res.data.message.profilePicture
-          );
+          console.log("profil pic", res.data.message.profilePicture);
+          setName(res.data.message.account.name);
+          setFirstName(res.data.message.account.firstname);
+          setEmail(res.data.message.email);
+          setProfilePicture(res.data.message.profilePicture);
+          setPseudo(res.data.message.pseudo);
+          setBackgroundPicture(res.data.message.backgroundPicture);
+          setUserPlaylist(res.data.message.playlists);
         })
         .catch((e) => {
           console.error("Error while getting user", e);
@@ -55,7 +91,7 @@ const Home = () => {
           fontSize: 30,
           textAlign: "left",
           marginLeft: 20,
-          marginTop: 20,
+          marginTop: 125,
           alignContent: "left",
         }}
       >
@@ -66,7 +102,7 @@ const Home = () => {
           color: "white",
           backgroundColor: "white",
           height: 1,
-          width: "90%",
+          width: "95%",
           alignSelf: "left",
           marginLeft: 20,
         }}
@@ -83,6 +119,80 @@ const Home = () => {
           </div>
         ))}
       </div>
+      <div
+        style={{
+          color: "white",
+          fontSize: 30,
+          textAlign: "left",
+          marginLeft: 20,
+          marginTop: 20,
+          alignContent: "left",
+        }}
+      >
+        Des vibes qui pourrais vous plaire 👀
+      </div>
+      <hr
+        style={{
+          color: "white",
+          backgroundColor: "white",
+          height: 1,
+          width: "95%",
+          alignSelf: "left",
+          marginLeft: 20,
+        }}
+      />
+      <div className="playlist-container">
+        {genre.map((playlist, index) => (
+          <div key={index} className="playlist-display">
+            {Object(playlist).name}
+            <img
+              src={Object(playlist).picture}
+              alt="playlist"
+              className="playlist-image"
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        style={{
+          color: "white",
+          fontSize: 30,
+          textAlign: "left",
+          marginLeft: 20,
+          marginTop: 20,
+          alignContent: "left",
+        }}
+      >
+        Des artistes que vous pourriez aimer 💖
+      </div>
+      <hr
+        style={{
+          color: "white",
+          backgroundColor: "white",
+          height: 1,
+          width: "95%",
+          alignSelf: "left",
+          marginLeft: 20,
+        }}
+      />
+      <div className="playlist-container" style={{
+        marginBottom: 50
+      }}>
+        {band.map((playlist, index) => (
+          <div key={index} className="playlist-display">
+            {Object(playlist).name}
+            <img
+              src={Object(playlist).profilePic}
+              alt="playlist"
+              className="playlist-image"
+              style={{
+                borderRadius: "50%"
+              }}
+            />
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 };

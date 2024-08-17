@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style/Header.css";
 import { useAuth } from "../context/AuthContext";
 import logo from "../image/logo.png";
 import SearchBar from "./SearchBar";
+import defaultPP from "../image/avatar190.png"
+import { useUser } from "../context/UserContext";
 
 const Header = () => {
+  const { profilePicture, pseudo} = useUser();
+  const [havePP, setHavePP] = useState(false);
   const [option, setOption] = useState(false);
   const [modal, setModal] = useState(false);
   const { toggleSignup } = useAuth();
+
+  useEffect(() => {
+    console.log("profilePicture", profilePicture);
+    if (profilePicture === "") {
+      setHavePP(false);
+    } else {
+      setHavePP(true);
+      
+    }
+
+
+  }, [profilePicture]);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -15,7 +31,6 @@ const Header = () => {
   };
 
   const showOption = () => {
-    const userName = localStorage.getItem("pseudo");
     return (
       <>
         {modal && (
@@ -34,7 +49,7 @@ const Header = () => {
             }}
           >
             <div className="modal">
-              <h2>Vous voulez vous déconnecter</h2>
+              <h2>Êtes vous sur de vouloir vous déconnecter ?</h2>
               <div>
                 <button
                   onClick={() => setModal(!modal)}
@@ -70,7 +85,7 @@ const Header = () => {
               marginBottom: "10px",
             }}
           >
-            {userName}
+            {pseudo}
           </h2>
           <hr
             style={{
@@ -116,8 +131,9 @@ const Header = () => {
             cursor: "pointer",
           }}
         >
-          <img
-            src={localStorage.getItem("profilPicture") ?? ""}
+          {havePP ? (
+                        <img
+            src={profilePicture}
             alt="user"
             style={{
               width: 50,
@@ -126,6 +142,20 @@ const Header = () => {
             }}
             onClick={() => setOption(!option)}
           />
+            ) : (
+              <img
+            src={defaultPP}
+            alt="user"
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: "50%",
+            }}
+            onClick={() => setOption(!option)}
+          />
+              
+              )}
+
           {option && showOption()}
         </div>
       </div>

@@ -40,7 +40,7 @@ const Signup = (props: props) => {
           await axios
             .post(`${process.env.REACT_APP_API_URL}/user/create`, {
               name: formValues.name,
-              firstName: formValues.firstName,
+              firstname: formValues.firstName,
               email: formValues.email,
               password: formValues.password,
               pseudo: formValues.pseudo,

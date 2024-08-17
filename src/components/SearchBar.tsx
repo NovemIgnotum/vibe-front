@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./style/SearchBar.css";
 import { useState, useEffect } from "react";
+import { useSearchContext } from "../context/SearchContext";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -32,6 +33,8 @@ const SearchBar = () => {
 
   useEffect(() => {
     searchRequest(search);
+
+
   }, [search]);
 
   return (

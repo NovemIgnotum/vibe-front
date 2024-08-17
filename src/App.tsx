@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Connexion from "./pages/connexion";
+import "./pages/search";
 import { ToastContainer } from "react-toastify";
 import { useAuth } from "./context/AuthContext";
+import { useSearchContext } from "./context/SearchContext";
 import Header from "./components/Header";
 import Home from "./pages/home";
 
