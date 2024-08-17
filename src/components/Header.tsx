@@ -3,26 +3,26 @@ import "./style/Header.css";
 import { useAuth } from "../context/AuthContext";
 import logo from "../image/logo.png";
 import SearchBar from "./SearchBar";
-import defaultPP from "../image/avatar190.png"
+import defaultPP from "../image/avatar190.png";
 import { useUser } from "../context/UserContext";
 
-const Header = () => {
-  const { profilePicture, pseudo} = useUser();
+interface headerProps {
+  showProfil: () => void;
+  goBackToHome: () => void;
+}
+const Header = (props: headerProps) => {
+  const { profilePicture, pseudo } = useUser();
   const [havePP, setHavePP] = useState(false);
   const [option, setOption] = useState(false);
   const [modal, setModal] = useState(false);
   const { toggleSignup } = useAuth();
 
   useEffect(() => {
-    console.log("profilePicture", profilePicture);
     if (profilePicture === "") {
       setHavePP(false);
     } else {
       setHavePP(true);
-      
     }
-
-
   }, [profilePicture]);
 
   const handleLogout = () => {
@@ -49,7 +49,7 @@ const Header = () => {
             }}
           >
             <div className="modal">
-              <h2>Êtes vous sur de vouloir vous déconnecter ?</h2>
+              <h2>Êtes-vous sûr de vouloir vous déconnecter ?</h2>
               <div>
                 <button
                   onClick={() => setModal(!modal)}
@@ -58,7 +58,7 @@ const Header = () => {
                     width: "50px",
                   }}
                 >
-                  non
+                  Non
                 </button>
                 <button
                   onClick={handleLogout}
@@ -68,7 +68,7 @@ const Header = () => {
                     backgroundColor: "green",
                   }}
                 >
-                  oui
+                  Oui
                 </button>
               </div>
             </div>
@@ -76,13 +76,10 @@ const Header = () => {
         )}
         <div className="options">
           <h2
-            style={{
-              color: "white",
-              fontSize: 25,
-              textAlign: "center",
-              alignContent: "center",
-              margin: "0px",
-              marginBottom: "10px",
+            className="username"
+            onClick={() => {
+              setOption(false);
+              props.showProfil();
             }}
           >
             {pseudo}
@@ -123,7 +120,15 @@ const Header = () => {
   return (
     <div>
       <div className="header">
-        <img src={logo} alt="logo" className="logo" />
+        <img
+          src={logo}
+          alt="logo"
+          className="logo"
+          onClick={() => {
+            setOption(false);
+            props.goBackToHome();
+          }}
+        />
         <SearchBar />
         <div
           className="user-image"
@@ -131,9 +136,8 @@ const Header = () => {
             cursor: "pointer",
           }}
         >
-          {havePP ? (
-                        <img
-            src={profilePicture}
+          <img
+            src={havePP ? profilePicture : defaultPP}
             alt="user"
             style={{
               width: 50,
@@ -142,20 +146,6 @@ const Header = () => {
             }}
             onClick={() => setOption(!option)}
           />
-            ) : (
-              <img
-            src={defaultPP}
-            alt="user"
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: "50%",
-            }}
-            onClick={() => setOption(!option)}
-          />
-              
-              )}
-
           {option && showOption()}
         </div>
       </div>

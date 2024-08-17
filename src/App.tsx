@@ -1,16 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Connexion from "./pages/connexion";
-import "./pages/search";
 import { ToastContainer } from "react-toastify";
 import { useAuth } from "./context/AuthContext";
-import { useSearchContext } from "./context/SearchContext";
 import Header from "./components/Header";
 import Home from "./pages/home";
+import Profil from "./pages/userProfil";
 
 const App = () => {
   const { isSignup } = useAuth();
+  const [showProfil, setShowProfil] = useState(false);
+
+  const handleShowProfil = () => {
+    setShowProfil(true);
+  };
+
+  const handleGoBackToHome = () => {
+    setShowProfil(false);
+  };
 
   useEffect(() => {}, [isSignup]);
 
@@ -24,8 +32,11 @@ const App = () => {
           </div>
         ) : (
           <div className="body">
-            <Header />
-            <Home />
+            <Header
+              showProfil={handleShowProfil}
+              goBackToHome={handleGoBackToHome}
+            />
+            {showProfil ? <Profil /> : <Home />}
           </div>
         )}
       </header>
