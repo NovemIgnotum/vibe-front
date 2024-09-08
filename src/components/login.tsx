@@ -18,7 +18,6 @@ const Login = (props: props) => {
   const loginUser = async () => {
     try {
       if (formValues.email === "" || formValues.password === "") {
-        console.log("Please fill in all the form fields");
         toast.error("Veuillez remplir tous les champs du formulaire");
         return;
       } else {
@@ -29,7 +28,6 @@ const Login = (props: props) => {
           })
           .then((res) => {
             console.log("User logged in", res);
-            toast.success("Utilisateur connecté avec succès");
             toggleSignup();
             localStorage.setItem("id", res.data.id);
             localStorage.setItem("token", res.data.token);

@@ -15,6 +15,12 @@ interface UserContextType {
     setBackgroundPicture: (backgroundPicture: string) => void;
     playlists: string[];
     setPlaylists: (playlists: string[]) => void;
+    followers: string[];
+    setFollowers: (followers: string[]) => void;
+    following: string[];
+    setFollowing: (following: string[]) => void;
+    likedSongs: string[];
+    setLikedSongs: (likedSongs: string[]) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -31,9 +37,12 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [pseudo, setPseudo] = useState<string>("");
     const [backgroundPicture, setBackgroundPicture] = useState<string>("");
     const [playlists, setPlaylists] = useState<string[]>([]);
+    const [followers, setFollowers] = useState<string[]>([]);
+    const [following, setFollowing] = useState<string[]>([]);
+    const [likedSongs, setLikedSongs] = useState<string[]>([]);
 
     return (
-        <UserContext.Provider value={{ name, setName, firstName, setFirstName, email, setEmail, profilePicture, setProfilePicture, pseudo, setPseudo, backgroundPicture, setBackgroundPicture, playlists, setPlaylists }}>
+        <UserContext.Provider value={{ name, setName, firstName, setFirstName, email, setEmail, profilePicture, setProfilePicture, pseudo, setPseudo, backgroundPicture, setBackgroundPicture, playlists, setPlaylists, followers, setFollowers, following, setFollowing, likedSongs, setLikedSongs }}>
             {children}
         </UserContext.Provider>
     );

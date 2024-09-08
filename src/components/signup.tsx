@@ -18,8 +18,6 @@ const Signup = (props: props) => {
   });
 
   const createUser = async () => {
-    console.log("User created");
-    console.log(formValues);
     if (
       formValues.name === "" ||
       formValues.firstName === "" ||
@@ -28,7 +26,6 @@ const Signup = (props: props) => {
       formValues.passwordConfirm === "" ||
       formValues.pseudo === ""
     ) {
-      console.log("Please fill in all the form fields");
       toast.error("Veuillez remplir tous les champs du formulaire");
       return;
     } else {
@@ -47,7 +44,6 @@ const Signup = (props: props) => {
               role: "user",
             })
             .then((res) => {
-              console.log("User created", res);
               toast.success("Utilisateur créé avec succès");
               setFormValues({
                 name: "",

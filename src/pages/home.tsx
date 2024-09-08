@@ -7,7 +7,17 @@ const Home = () => {
   const [playlists, setPlaylists] = useState([]);
   const [band, setBand] = useState([]);
   const [genre, setGenre] = useState([]);
-  const {setFirstName, setBackgroundPicture, setEmail, setName, setPlaylists : setUserPlaylist, setProfilePicture, setPseudo  } = useUser();
+  const {setFirstName, 
+    setBackgroundPicture, 
+    setEmail, 
+    setName, 
+    setPlaylists : setUserPlaylist, 
+    setProfilePicture, 
+    setPseudo,
+    setFollowers,
+    setFollowing,
+    setLikedSongs,
+    } = useUser();
   useEffect(() => {
     myplaylist();
     getUserInfo();
@@ -66,7 +76,6 @@ const Home = () => {
       await axios
         .get(`${process.env.REACT_APP_API_URL}/user/${userId}`)
         .then((res) => {
-          console.log("profil pic", res.data.message.profilePicture);
           setName(res.data.message.account.name);
           setFirstName(res.data.message.account.firstname);
           setEmail(res.data.message.email);
@@ -74,6 +83,9 @@ const Home = () => {
           setPseudo(res.data.message.pseudo);
           setBackgroundPicture(res.data.message.backgroundPicture);
           setUserPlaylist(res.data.message.playlists);
+          setFollowers(res.data.message.followers);
+          setFollowing(res.data.message.following);
+          setLikedSongs(res.data.message.likedTracks);
         })
         .catch((e) => {
           console.error("Error while getting user", e);

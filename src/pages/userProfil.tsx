@@ -1,7 +1,16 @@
 import { useUser } from "../context/UserContext";
+import { useState, useEffect } from "react";
 
 const Profil = () => {
-  const { name, firstName, email, pseudo, profilePicture, backgroundPicture } = useUser();
+  const { pseudo, profilePicture, backgroundPicture, followers, following,likedSongs } = useUser();
+const [numberOfFollower, setNumberOfFollower] = useState(0);
+const [numberOfFollowing, setNumberOfFollowing] = useState(0);
+
+
+  useEffect(() => {
+    setNumberOfFollower(followers.length);
+    setNumberOfFollowing(following.length);
+  }, [followers, following]);
   
   return (
     <div style={{ width: "100%", marginTop: "90px" }}>
@@ -18,19 +27,19 @@ const Profil = () => {
             left: 0,
           }}
         />
-        
-        {/* Profile Picture and Info */}
+  
+        {/* Profile Picture and Info on top of the background */}
         <div
           style={{
             position: "absolute",
             top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
+            left: "20px",
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
+            transform: "translateY(-50%)",
           }}
         >
+          {/* Profile Picture */}
           <img
             src={profilePicture}
             alt="profile"
@@ -42,18 +51,26 @@ const Profil = () => {
               objectFit: "cover",
             }}
           />
-          <h1
+  
+          {/* User Information */}
+          <div
             style={{
+              marginLeft: "20px",
               color: "white",
-              fontSize: "30px",
-              marginTop: "20px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
           >
-            {pseudo}
-          </h1>
+            <h1 style={{ fontSize: "30px", marginBottom: "10px" }}>{pseudo}</h1>
+            <div style={{ fontSize: "18px" }}>
+              <div>{numberOfFollower} followers</div>
+              <div>{numberOfFollowing} following</div>
+            </div>
+          </div>
         </div>
       </div>
-
+  
       {/* User Details */}
       <div
         style={{
@@ -64,9 +81,11 @@ const Profil = () => {
           marginTop: "20px",
         }}
       >
+        {/* Add any additional user details here */}
       </div>
     </div>
   );
+  
 };
 
 export default Profil;
