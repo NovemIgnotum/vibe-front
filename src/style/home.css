@@ -1,3 +1,11 @@
+.body {
+    background-color: #232323;
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
 .playlist-container {
     display: flex;
     flex-wrap: wrap;
@@ -9,7 +17,6 @@
 .playlist-display {
     display: flex;
     flex-direction: column;
-    background-color: blue;
     padding: 10px;
 }
 

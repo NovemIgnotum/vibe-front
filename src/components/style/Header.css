@@ -9,6 +9,7 @@
     align-items: center;
     position: relative; /* Make header the reference for absolute positioning */
     position: fixed; /* Pour la rendre fixe */
+    top: 0;
 
 }
 

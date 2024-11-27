@@ -5,17 +5,15 @@ import logo from "../image/logo.png";
 import SearchBar from "./SearchBar";
 import defaultPP from "../image/avatar190.png";
 import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-interface headerProps {
-  showProfil: () => void;
-  goBackToHome: () => void;
-}
-const Header = (props: headerProps) => {
+const Header = () => {
   const { profilePicture, pseudo } = useUser();
   const [havePP, setHavePP] = useState(false);
   const [option, setOption] = useState(false);
   const [modal, setModal] = useState(false);
   const { toggleSignup } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (profilePicture === "") {
@@ -79,7 +77,7 @@ const Header = (props: headerProps) => {
             className="username"
             onClick={() => {
               setOption(false);
-              props.showProfil();
+              navigate("/profil");
             }}
           >
             {pseudo}
@@ -125,8 +123,7 @@ const Header = (props: headerProps) => {
           alt="logo"
           className="logo"
           onClick={() => {
-            setOption(false);
-            props.goBackToHome();
+            navigate("/home");
           }}
         />
         <SearchBar />

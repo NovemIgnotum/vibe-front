@@ -3,12 +3,14 @@ import axios from "axios";
 import "./style/login.css";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface props {
   alreadyHaveAccount: () => void;
 }
 
 const Login = (props: props) => {
+  const navigate = useNavigate();
   const { toggleSignup } = useAuth();
   const [formValues, setFormValues] = useState({
     email: "",
@@ -27,7 +29,6 @@ const Login = (props: props) => {
             password: formValues.password,
           })
           .then((res) => {
-            console.log("User logged in", res);
             toggleSignup();
             localStorage.setItem("id", res.data.id);
             localStorage.setItem("token", res.data.token);
@@ -35,6 +36,7 @@ const Login = (props: props) => {
               email: "",
               password: "",
             });
+            navigate("/home");
           })
           .catch((e) => {
             console.error("Error while logging in user", e);
