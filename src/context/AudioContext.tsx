@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 
 interface Track {
   title: string;
-  band: string;
+  band: object;
   track: string;
 }
 

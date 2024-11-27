@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAudio } from "../context/AudioContext";
 import axios from "axios";
+import "../style/PlaylistPage.css";
 
 interface Track {
   title: string;
-  band: string;
+  band: {
+    name: string;
+  };
   track: string;
 }
 
@@ -15,10 +18,16 @@ interface IPlayList {
   tracks: Track[];
 }
 
+interface IOwner {
+  _id: string;
+  name: string;
+}
+
 const PlayListPage = () => {
   const [playlistDetails, setPlaylistDetails] = useState<IPlayList | null>(
     null
   );
+  const [ownerDetails, setOwnerDetails] = useState<IOwner | null>(null);
   const params = useParams();
   const { setTrack } = useAudio();
 
@@ -28,8 +37,9 @@ const PlayListPage = () => {
         const res = await axios.get(
           `${process.env.REACT_APP_API_URL}/playlist/read/${params.playListId}`
         );
-        console.log("playlist", res.data.playlist);
+        console.log("playlist", res.data);
         setPlaylistDetails(res.data.playlist);
+        setOwnerDetails(res.data.band);
       } catch (e) {
         console.error("Error while getting playlist", e);
       }
@@ -39,28 +49,33 @@ const PlayListPage = () => {
   }, [params]);
 
   return (
-    <div
-      style={{
-        marginTop: "100px",
-      }}
-    >
-      <h1>PlayList Page {params.playListId}</h1>
+    <div className="playlist-page">
       {playlistDetails && (
         <>
-          <img
-            src={playlistDetails.cover}
-            alt={`${playlistDetails.name} cover`}
-          />
-          <h3>{playlistDetails.name}</h3>
+          <div className="playlist-information">
+            <img
+              src={playlistDetails.cover}
+              alt={`${playlistDetails.name} cover`}
+              className="playlist-cover"
+            />
+            <h1>
+              {Object(playlistDetails).name} -
+              {ownerDetails && ownerDetails.name}{" "}
+            </h1>{" "}
+          </div>
           <ul>
             {playlistDetails.tracks.map((track, index) => (
               <li key={index}>
-                <h4>{track.title}</h4>
-                <button
-                  onClick={() => setTrack(track, index, playlistDetails.tracks)}
-                >
-                  Play
-                </button>
+                <div>
+                  <h4>{track.title}</h4>
+                  <button
+                    onClick={() =>
+                      setTrack(track, index, playlistDetails.tracks)
+                    }
+                  >
+                    Play
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

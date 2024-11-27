@@ -10,6 +10,7 @@ const AudioPlayer: React.FC = () => {
   const [volume, setVolume] = useState<number>(50); // Initialisé à 50%
 
   useEffect(() => {
+    console.log("currentTrack", currentTrack);
     // Commence la lecture lorsque la piste change
     if (currentTrack && audioRef.current) {
       audioRef.current.play();
@@ -55,6 +56,11 @@ const AudioPlayer: React.FC = () => {
 
   return currentTrack ? (
     <div className="audio-player">
+      <img
+        src={Object(currentTrack).originalAlbum.cover}
+        alt={`${Object(currentTrack).originalAlbum.name} cover`}
+        className="cover"
+      />
       <audio
         ref={audioRef}
         src={currentTrack.track}
@@ -66,7 +72,7 @@ const AudioPlayer: React.FC = () => {
       </button>
       <div className="track-info">
         <div>
-          {currentTrack.title} - {currentTrack.band}
+          {currentTrack.title} - {Object(currentTrack).band.name}
         </div>
         <input
           type="range"
