@@ -1,0 +1,77 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    background-color: #00123F;
+    width: 98vw;
+    height: 50px;
+    color: white;
+    padding: 20px;
+    align-items: center;
+    position: relative; /* Make header the reference for absolute positioning */
+    position: fixed; /* Pour la rendre fixe */
+    top: 0;
+
+}
+
+.logo {
+    height: 100%;
+}
+
+.user-image {
+    margin-left: auto; /* Push user image to the right */
+    cursor: pointer; /* Cursor indicates it's clickable */
+    align-self: flex-end;
+}
+
+.options {
+    background-color: #00123F;
+    display: flex;
+    flex-direction: column;
+    position: absolute; /* Position relative to the header */
+    top: 100%; /* Position below the header */
+    right: 1px; /* Align to the right with some padding */
+    height: 250px;
+    width: 250px;
+    max-width: 300px;
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+.logout {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    width: 150px;
+    font-weight: BOLD;
+    font-size: 15px;
+    align-self: center;
+}
+
+.modal {
+    width: 300px;
+    height: 200px;
+    background-color: #00123F;
+    color: white;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    
+}
+
+.username {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    align-content: center;
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+.username :hover {
+    color: black;
+}
