@@ -4,7 +4,7 @@
     align-items: left;
     background-color: #232323;
     color: white;
-    width: 100%;
+    width: 98.5%;
     height:100%;
     margin-top: 60px;
     padding: 15px;
@@ -26,14 +26,64 @@
 
 .playlist-cover {
     align-self: flex-start;
-    width: 400px;
-    height: 400px;
+    width: 250px;
+    height: 250px;
+}
+
+.legend-separator {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #383838;
+    width: 100%;
+}
+
+.legend-container {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    padding: 15px;
+    width: 98%;
 }
 
 .track-list {
     display: flex;
     flex-direction: column;
     align-items: left;
-    margin-top: 20px;
     padding: 15px;
+    width: 100%;
+}
+.track-item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    background-color: transparent;
+    height: 70px;
+}
+.track-item:hover {
+    background-color: #383838;
+    color: green;
+}
+
+.playLogo {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    width: 20px;
+    height: 20px;
+
+}
+
+.track-item img {
+    margin-left: 10px;
+    align-self: center;
+    width: 75px;
+    height: 75px;
+}
+
+.track-item h1 {
+    font-size: 20px;
+    margin: 0 0 0 30px;
+    padding: 0;
+    align-self: center;
 }

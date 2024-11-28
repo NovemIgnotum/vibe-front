@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAudio } from "../context/AudioContext";
 import axios from "axios";
 import "../style/PlaylistPage.css";
+import { FaPlay } from "react-icons/fa";
 
 interface Track {
   title: string;
@@ -63,15 +64,26 @@ const PlayListPage = () => {
               {ownerDetails && ownerDetails.name}{" "}
             </h1>{" "}
           </div>
+          <div className="legend-container">
+            <h2>Titre</h2>
+            <h2>Artiste</h2>
+            <h2>Album</h2>
+          </div>
+          <div className="legend-separator" />
           <div className="track-list">
             {playlistDetails.tracks.map((track, index) => (
-              <div className="track-item">
-                <h4>{track.title}</h4>
-                <button
-                  onClick={() => setTrack(track, index, playlistDetails.tracks)}
-                >
-                  Play
-                </button>
+              <div
+                className="track-item"
+                onClick={() => setTrack(track, index, playlistDetails.tracks)}
+              >
+                <FaPlay className="playLogo" />
+                <img
+                  src={Object(track).originalAlbum.cover}
+                  alt="track cover"
+                />
+                <h1>{track.title}</h1>
+                <h1>{track.band.name}</h1>
+                <h1>{Object(track).originalAlbum.name}</h1>
               </div>
             ))}
           </div>
