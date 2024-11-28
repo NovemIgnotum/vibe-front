@@ -8,6 +8,7 @@ interface Track {
 
 interface AudioContextType {
   currentTrack: Track | null;
+  isPlayerActive: boolean;
   setTrack: (track: Track, trackIndex: number, playlist: Track[]) => void;
   playNextTrack: () => void;
 }
@@ -18,11 +19,13 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [playlist, setPlaylist] = useState<Track[]>([]);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isPlayerActive, setIsPlayerActive] = useState<boolean>(false);
 
   const setTrack = (track: Track, trackIndex: number, playlist: Track[]) => {
     setCurrentTrack(track);
     setCurrentIndex(trackIndex);
     setPlaylist(playlist);
+    setIsPlayerActive(true);
   };
 
   const playNextTrack = () => {
@@ -30,6 +33,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       const nextIndex = currentIndex + 1;
       setCurrentTrack(playlist[nextIndex]);
       setCurrentIndex(nextIndex);
+      setIsPlayerActive(true);
     } else {
       // Fin de la playlist, vous pouvez soit répéter soit arrêter
       setCurrentTrack(null);
@@ -37,7 +41,9 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AudioContext.Provider value={{ currentTrack, setTrack, playNextTrack }}>
+    <AudioContext.Provider
+      value={{ currentTrack, isPlayerActive, setTrack, playNextTrack }}
+    >
       {children}
     </AudioContext.Provider>
   );

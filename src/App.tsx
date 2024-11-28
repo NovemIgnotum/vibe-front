@@ -5,15 +5,17 @@ import { ToastContainer } from "react-toastify";
 import { useAuth } from "./context/AuthContext";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useAudio } from "./context/AudioContext";
 
 import Home from "./pages/home";
 import Profil from "./pages/userProfil";
 import PlayList from "./pages/Playlist";
 const AppContent = () => {
   const { isSignup } = useAuth();
+  const { isPlayerActive } = useAudio();
 
   return (
-    <div className="App">
+    <div className={`app-container ${isPlayerActive ? "player-active" : ""}`}>
       <ToastContainer />
       {isSignup && <Header />}
       <header className="App-header">

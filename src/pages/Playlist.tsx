@@ -63,22 +63,18 @@ const PlayListPage = () => {
               {ownerDetails && ownerDetails.name}{" "}
             </h1>{" "}
           </div>
-          <ul>
+          <div className="track-list">
             {playlistDetails.tracks.map((track, index) => (
-              <li key={index}>
-                <div>
-                  <h4>{track.title}</h4>
-                  <button
-                    onClick={() =>
-                      setTrack(track, index, playlistDetails.tracks)
-                    }
-                  >
-                    Play
-                  </button>
-                </div>
-              </li>
+              <div className="track-item">
+                <h4>{track.title}</h4>
+                <button
+                  onClick={() => setTrack(track, index, playlistDetails.tracks)}
+                >
+                  Play
+                </button>
+              </div>
             ))}
-          </ul>
+          </div>
         </>
       )}
     </div>
