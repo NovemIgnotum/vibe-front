@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAudio } from "../context/AudioContext";
 import axios from "axios";
 import "../style/PlaylistPage.css";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 
 interface Track {
   title: string;
@@ -29,6 +29,7 @@ const PlayListPage = () => {
     null
   );
   const [ownerDetails, setOwnerDetails] = useState<IOwner | null>(null);
+  const [playMusic, setPlayMusic] = useState<number | null>(null);
   const params = useParams();
   const { setTrack } = useAudio();
 
@@ -62,28 +63,47 @@ const PlayListPage = () => {
             <h1>
               {Object(playlistDetails).name} -
               {ownerDetails && ownerDetails.name}{" "}
-            </h1>{" "}
+            </h1>
+            <h1>
+              {playlistDetails.tracks.length}
+              {playlistDetails.tracks.length > 1 ? "titres" : "titre"}
+            </h1>
           </div>
-          <div className="legend-container">
-            <h2>Titre</h2>
-            <h2>Artiste</h2>
-            <h2>Album</h2>
+          <div className="playlist-legend">
+            <h2 className="title">Titre</h2>
+            <h2 className="band">Artiste</h2>
+            <h2 className="album">Album</h2>
           </div>
           <div className="legend-separator" />
           <div className="track-list">
             {playlistDetails.tracks.map((track, index) => (
               <div
                 className="track-item"
-                onClick={() => setTrack(track, index, playlistDetails.tracks)}
+                onClick={() => {
+                  setTrack(track, index, playlistDetails.tracks);
+                  setPlayMusic(index);
+                }}
               >
-                <FaPlay className="playLogo" />
-                <img
-                  src={Object(track).originalAlbum.cover}
-                  alt="track cover"
-                />
-                <h1>{track.title}</h1>
-                <h1>{track.band.name}</h1>
-                <h1>{Object(track).originalAlbum.name}</h1>
+                <div className="pochette-container">
+                  {playMusic === index ? (
+                    <>
+                      <FaPause className="playLogo" />
+                    </>
+                  ) : (
+                    <>
+                      <FaPlay className="playLogo" />
+                    </>
+                  )}
+                  <img
+                    src={Object(track).originalAlbum.cover}
+                    alt="track cover"
+                  />
+                  <h1 className="track-title">{track.title}</h1>
+                </div>
+                <h1 className="track-band">{track.band.name}</h1>
+                <h1 className="track-originalAlbum">
+                  {Object(track).originalAlbum.name}
+                </h1>
               </div>
             ))}
           </div>

@@ -34,7 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "postinstall": "electron-builder install-app-deps",
-    "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://127.0.0.1:3000 && tsc -p electron -w\" \"wait-on http://127.0.0.1:3000 && tsc -p electron && electron .\"",
+    "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://127.0.0.1:3000 && tsc -p electron -w\" \"wait-on http://127.0.0.1:3000 && tsc -p electron && npx electron .\"",
     "electron:build": "npm build && tsc -p electron && electron-builder",
     "eject": "react-scripts eject"
   },
