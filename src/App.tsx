@@ -1,47 +1,41 @@
 import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
-import Connexion from "./pages/connexion";
-import { ToastContainer } from "react-toastify";
-import { useAuth } from "./context/AuthContext";
-import Header from "./components/Header";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useAudio } from "./context/AudioContext";
+import Connexion from "./pages/Connexion";
+import axios from "axios";
+import { useEffect, useState, useCallback } from "react";
 
-import Home from "./pages/home";
-import Profil from "./pages/userProfil";
-import PlayList from "./pages/Playlist";
-const AppContent = () => {
-  const { isSignup } = useAuth();
-  const { isPlayerActive } = useAudio();
+function App() {
+  const [isFetched, setIsFetched] = useState(false);
+
+  const fetchProfile = useCallback(async () => {
+    if (isFetched) return; // Éviter les appels multiples
+    setIsFetched(true);
+
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_APP_API_URL}/user/getProfile`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("response", response);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [isFetched]);
+
+  useEffect(() => {
+    fetchProfile();
+  }, [fetchProfile]);
 
   return (
-    <div className={`app-container ${isPlayerActive ? "player-active" : ""}`}>
-      <ToastContainer />
-      {isSignup && <Header />}
-      <header className="App-header">
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/profil" element={<Profil />} />
-          <Route path="/playlist/:playListId" element={<PlayList />} />
-        </Routes>
-      </header>
-      {!isSignup ? (
-        <div>
-          <Connexion />
-        </div>
-      ) : (
-        <></>
-      )}
-    </div>
+    <>
+      <Connexion />
+    </>
   );
-};
-
-const App = () => {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
-};
+}
 
 export default App;

@@ -1,0 +1,70 @@
+.container {
+    background-image: url("../assets/connexion.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #232323;
+}
+
+.connexion {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: auto + 10%;
+    color: #fff;
+}
+
+.form input {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form label{
+    font-size: 20px;
+    color: #3CBF54;
+}
+
+.form button {
+    margin-top: 10px 0;
+    background-color: transparent;
+    color: #3CBF54;
+    border: none;
+    text-decoration: underline;
+
+}
+
+[type="submit"] {
+    background-color: #3CBF54;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+[type="submit"]:hover {
+    background-color: #2a8c3e;
+}

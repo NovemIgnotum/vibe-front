@@ -1,75 +1,35 @@
 {
-  "name": "my-app",
-  "version": "0.2.0",
-  "author": "Your Name",
-  "description": "React-TypeScript-Electron sample with Create React App and Electron Builder",
-  "homepage": ".",
-  "main": "build/electron/main.js",
+  "name": "vibe",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
-    "@types/electron-devtools-installer": "^2.2.2",
-    "@types/jest": "^29.4.0",
-    "@types/node": "^18.13.0",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@types/react-router-dom": "^5.3.3",
-    "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
-    "electron-devtools-installer": "^3.2.0",
-    "electron-reload": "^1.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^5.2.1",
-    "react-router-dom": "^6.28.0",
-    "react-scripts": "5.0.1",
-    "react-toastify": "^10.0.5",
-    "typescript": "^4.9.5",
-    "web-vitals": "^3.1.1"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "postinstall": "electron-builder install-app-deps",
-    "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://127.0.0.1:3000 && tsc -p electron -w\" \"wait-on http://127.0.0.1:3000 && tsc -p electron && npx electron .\"",
-    "electron:build": "npm build && tsc -p electron && electron-builder",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "build": {
-    "extends": null,
-    "files": [
-      "build/**/*"
-    ],
-    "directories": {
-      "buildResources": "assets"
-    }
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.54.2",
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
-    "concurrently": "^7.6.0",
-    "cross-env": "^7.0.3",
-    "electron": "^23.3.13",
-    "electron-builder": "^23.6.0",
-    "wait-on": "^7.0.1"
-  }
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5"
+  },
+  "proxy": "http://localhost:3003"
 }

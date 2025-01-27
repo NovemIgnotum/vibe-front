@@ -1,12 +1,25 @@
-.app-container {
-    background-color: #232323;
-    color: white;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    transition: margin-bottom 0.5s ease;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.app-container.player-active {
-margin-bottom: 80px;
+body {
+  font-size: 100%;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
